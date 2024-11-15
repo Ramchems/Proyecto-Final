@@ -1,0 +1,113 @@
+$(document).ready(function () {
+  const deckId = new URLSearchParams(window.location.search).get("deckId");
+
+  // Función para cargar los detalles del deck, incluyendo el número de "me gusta"
+  function loadDeck(deckId) {
+    $.ajax({
+      url: `/api/decks/${deckId}`,
+      method: "GET",
+      success: function (deck) {
+        const mainDeckContainer = $("#main-deck");
+        const commanderSlot = $("#commander-slot");
+
+        // Cargar las cartas del main deck
+        mainDeckContainer.empty();
+        deck.cards.forEach((card) => {
+          mainDeckContainer.append(
+            `<div><img src="${card.imageUrl}" alt="${card.name}" style="width: 100px; height: auto;"></div>`
+          );
+        });
+
+        // Cargar la carta del comandante
+        commanderSlot.empty();
+        commanderSlot.append(
+          `<div><img src="${deck.commander.imageUrl}" alt="${deck.commander.name}" style="width: 100px; height: auto;"></div>`
+        );
+
+        // Actualizar el conteo de cartas
+        $("#card-count").text(deck.cards.length);
+
+        // Actualizar el número total de "me gusta"
+        $("#likes-count").text(deck.likes);
+      },
+      error: function (err) {
+        console.error("Error al cargar el deck:", err);
+        alert("Error al cargar el deck");
+      },
+    });
+  }
+
+  // Función para cargar los comentarios
+  function loadComments(deckId) {
+    $.ajax({
+      url: `/api/decks/${deckId}/comments`,
+      method: "GET",
+      success: function (comments) {
+        const commentsList = $("#comments-list");
+        commentsList.empty();
+        comments.forEach((comment) => {
+          commentsList.append(
+            `<div><strong>${comment.username}:</strong> ${comment.comment}</div>`
+          );
+        });
+      },
+      error: function (err) {
+        console.error("Error al cargar los comentarios:", err);
+        alert("Error al cargar los comentarios");
+      },
+    });
+  }
+
+  // Manejar el envío de comentarios
+  $("#submit-comment").on("click", function () {
+    const commentText = $("#new-comment").val();
+    if (!commentText.trim()) {
+      alert("El comentario no puede estar vacío");
+      return;
+    }
+
+    $.ajax({
+      url: `/api/decks/${deckId}/comments`,
+      method: "POST",
+      data: JSON.stringify({ text: commentText }),
+      contentType: "application/json",
+      success: function () {
+        loadComments(deckId);
+        $("#new-comment").val("");
+      },
+      error: function (err) {
+        if (err.status === 401) {
+          alert("Debe estar autenticado para dejar un comentario");
+          window.location.href = "login.html"; // Redirigir a la página de inicio de sesión
+        } else {
+          console.error("Error al enviar el comentario:", err);
+          alert("Error al enviar el comentario");
+        }
+      },
+    });
+  });
+
+  // Manejar los "me gusta"
+  $("#like-button").on("click", function () {
+    $.ajax({
+      url: `/api/decks/${deckId}/like`,
+      method: "POST",
+      success: function (likes) {
+        $("#likes-count").text(likes);
+      },
+      error: function (err) {
+        if (err.status === 401) {
+          alert("Debe estar autenticado para dar 'me gusta'");
+          window.location.href = "login.html"; // Redirigir a la página de inicio de sesión
+        } else {
+          console.error("Error al dar 'me gusta':", err);
+          alert("Error al dar 'me gusta'");
+        }
+      },
+    });
+  });
+
+  // Cargar los datos iniciales
+  loadDeck(deckId);
+  loadComments(deckId);
+});

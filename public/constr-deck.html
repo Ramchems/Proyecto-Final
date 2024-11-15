@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construcción de Decks</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="logo.png" width="30" height="30" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="decks.html">Decks</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto" id="nav-user">
+
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid mt-5">
+        <div class="row"> <!-- Lado Izquierdo: Visualización de Cartas -->
+            <div class="col-md-2 no-margin-left">
+                <h3>Visualización de Cartas</h3>
+                <div id="selected-card"> <!-- Aquí se mostrará la imagen de la carta seleccionada y su efecto -->
+                </div>
+            </div> <!-- Centro: Deck Actual -->
+            <div class="col-md-7">
+                <h3>Deck Actual</h3>
+                <div id="main-deck" class="drop-zone deck-section" data-zone="deck">
+                    <h4>Main Deck</h4>
+                    <!-- Aquí se mostrarán las cartas del main deck -->
+                </div>
+
+                <div id="commander-slot" class="drop-zone deck-section" data-zone="commander">
+                    <h4>Comandante</h4> <!-- Aquí se mostrará la carta del comandante -->
+                </div>
+
+
+                <p>Cantidad de cartas: <span id="card-count">0</span></p>
+            </div> <!-- Lado Derecho: Buscador de Cartas -->
+            <div class="col-md-3">
+                <h3>Buscador de Cartas</h3> <input type="text" id="card-search-input" class="form-control"
+                    placeholder="Buscar cartas"> <button id="search-cards" class="btn btn-primary mt-2">Buscar
+                    Cartas</button> <button class="btn btn-secondary mt-2" type="button" data-toggle="collapse"
+                    data-target="#advancedSearch" aria-expanded="false" aria-controls="advancedSearch">Búsqueda
+                    Avanzada</button>
+                <div id="advancedSearch" class="collapse mt-3"> <select id="card-color" class="form-control mt-2">
+                        <option value="">Seleccionar Color</option>
+                        <option value="white">Blanco</option>
+                        <option value="blue">Azul</option>
+                        <option value="black">Negro</option>
+                        <option value="red">Rojo</option>
+                        <option value="green">Verde</option>
+                    </select> <select id="card-type" class="form-control mt-2">
+                        <option value="">Seleccionar Tipo</option>
+                        <option value="creature">Criatura</option>
+                        <option value="land">Tierra</option>
+                        <option value="artifact">Artefacto</option>
+                        <option value="enchantment">Encantamiento</option>
+                        <option value="instant">Instantáneo</option>
+                        <option value="sorcery">Hechizo</option>
+                    </select> </div>
+                <div id="card-results" class="fixed-height mt-3"> <!-- Resultados de la búsqueda de cartas -->
+                </div>
+            </div>
+        </div> <button id="save-deck" class="btn btn-success mt-3">Guardar Deck</button>
+    </div>
+    <!-- Modal para nombrar el deck -->
+    <div class="modal fade" id="nameDeckModal" tabindex="-1" role="dialog" aria-labelledby="nameDeckModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nameDeckModalLabel">Nombrar Deck</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="deck-name-input" class="form-control"
+                        placeholder="Introduce el nombre del deck">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="save-deck-confirm">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

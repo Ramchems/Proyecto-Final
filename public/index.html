@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Decks</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="logo.png" width="30" height="30" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="decks.html">Decks</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto" id="nav-user">
+                <!-- Espacio para los botones o el desplegable del perfil dependiendo del estado del usuario -->
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Barra de Búsqueda -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Buscar Decks" aria-label="Buscar Decks"
+                        aria-describedby="button-search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-search">Buscar</button>
+                        <button class="btn btn-outline-secondary" type="button" id="button-advanced-search">Búsqueda
+                            Avanzada</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Búsqueda Avanzada -->
+    <div class="modal fade" id="advancedSearchModal" tabindex="-1" role="dialog"
+        aria-labelledby="advancedSearchModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="advancedSearchModalLabel">Búsqueda Avanzada</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="advanced-search-form">
+                        <div class="form-group">
+                            <label for="deck-name">Nombre del Deck</label>
+                            <input type="text" class="form-control" id="deck-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="deck-colors">Colores del Deck</label>
+                            <input type="text" class="form-control" id="deck-colors">
+                        </div>
+                        <div class="form-group">
+                            <label for="card-name">Carta en el Deck</label>
+                            <input type="text" class="form-control" id="card-name">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
